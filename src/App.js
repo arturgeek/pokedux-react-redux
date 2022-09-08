@@ -2,22 +2,21 @@ import { Col } from 'antd';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
 import logo  from './statics/logo.svg'
-import { getPokemons, getPokemonDetails } from './api';
+import { getPokemons } from './api';
 import './App.css';
 import { useEffect } from 'react';
-import { setPokemons } from './actions';
+import { getPokemonsWithDetails } from './actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   
   const pokemons = useSelector( state => state.pokemons );
-  const dispatcher = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect( () => {
     const fetchPokemons = async () => { 
       const pokemonsResponse =  await getPokemons();
-      const pokemonsDetailed = await Promise.all( pokemonsResponse.map( (pokemon) => getPokemonDetails(pokemon) ));
-      dispatcher(setPokemons(pokemonsDetailed));
+      dispatch(getPokemonsWithDetails(pokemonsResponse));
     };
 
     fetchPokemons();

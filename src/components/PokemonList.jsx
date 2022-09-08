@@ -7,7 +7,7 @@ const PokemonList = ({ pokemons }) => {
             return <PokemonCard 
                 name={pokemon.name} 
                 image={pokemon.sprites.front_default} 
-                types={pokemon.types.map( (type) => { console.log(type); return type.type.name } ).join()}
+                types={pokemon.types.map( (type) => { return type.type.name } ).join()}
                 key={pokemon.name} 
             />
         })}

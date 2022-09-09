@@ -8,3 +8,7 @@
 .App img{
   margin-bottom: 3rem;
 }
+
+.App .loader {
+  margin: 3em auto;
+}

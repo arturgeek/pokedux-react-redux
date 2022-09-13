@@ -10,6 +10,7 @@ const PokemonList = ({ pokemons }) => {
                 types={pokemon.types}
                 id={pokemon.id}
                 favorite={pokemon.favorite}
+                visible={pokemon.visible}
                 key={pokemon.name}
             />
         })}

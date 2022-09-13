@@ -13,6 +13,11 @@ export const fetchPokemonWithDetails = createAsyncThunk(
         dispatch( setLoading(true));
         const pokemonsResponse = await getPokemons();
         const pokemonsDetailed = await Promise.all( pokemonsResponse.map( (pokemon) => getPokemonDetails(pokemon) ));
+
+        pokemonsDetailed.forEach( (pokemon) => {
+            pokemon.visible = true;
+        });
+
         dispatch( setPokemons(pokemonsDetailed) );
         dispatch( setLoading(false));
     }
@@ -23,7 +28,6 @@ export const dataSlice = createSlice({
     initialState,
     reducers: {
         setPokemons: (state, action) => {
-            console.log(action);
             state.pokemons = action.payload;
         },
         setFavorite: (state, action) => {
@@ -38,6 +42,15 @@ export const dataSlice = createSlice({
         },
         setSearchedValue: (state, action) => {
             state.searchedValue = action.payload;
+
+            if( state.searchedValue !== "" ) {
+                state.pokemons.forEach( (pokemon) => {
+                    pokemon.visible = pokemon.name.toLowerCase().includes(state.searchedValue.toLowerCase())
+                });
+            }
+            else {
+                state.pokemons.forEach( (pokemon) => pokemon.visible = true )
+            }
         }
     }
 });

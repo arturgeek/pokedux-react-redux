@@ -2,8 +2,6 @@ import { Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchedValue } from '../slices/dataSlice';
 
-
-
 const Searcher = () => {
 
     const searchedValue = useSelector( (state) => state.data.searchedValue );
